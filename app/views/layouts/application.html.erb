@@ -1,14 +1,98 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Creativemons</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CreativeMons</title>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
 
-<%= yield %>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,100,300,400,600' rel='stylesheet' type='text/css'>
 
-</body>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body ng-app="CreativeApp" ng-controller="EntriesIndexCtrl">
+    <div class="navbar-wrapper">
+      <div class="container-fluid">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="nav navbar-nav pull-left">
+              <ul class="nav navbar-nav pull-right">
+                <li class="agenda">
+                  <a href="/entries#content-anchor">
+                    <img src="/images/calendar.png">
+                    Agenda
+                  </a>
+                </li>
+                <li class="news">
+                  <a href="/entries#content-anchor">
+                    <img src="/images/news.png">
+                    News
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul class="nav navbar-nav pull-right">
+                <li class="add">
+                  <a href="<% URL::route('entries.create') %>">
+                    Soumettre une publication
+                    <i class="glyphicon glyphicon-plus"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="container">
+            <div class="carousel-caption">
+              <a href="/">
+                <img src="/images/logo.png"/>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a id="content-anchor"></a>
+
+    <div class="row red-bar">
+    </div>
+
+    <div class="container marketing">
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div class="row red-bar-2">
+    </div>
+
+    <footer>
+      Made with <span class="love">&#9825;</span> by
+
+      <br/><br/>
+
+      <a href="/">
+        <img src="/images/logo-black.png"/>
+      </a>
+    </footer>
+
+    <%= javascript_include_tag 'application' %>
+  </body>
 </html>
