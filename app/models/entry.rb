@@ -1,5 +1,9 @@
 class Entry < ActiveRecord::Base
 
+  # Carrierwave (image processing)
+
+  mount_uploader :picture, PictureUploader
+
   # Associations
 
   has_many :comments
@@ -9,14 +13,20 @@ class Entry < ActiveRecord::Base
 
   after_initialize :create_token
 
+  # Scopes
+
+  def self.published
+    all.select(&:published?)
+  end
+
   # Methods
 
   def up_votes
-    votes.where('up' => true)
+    votes.where(:up => true)
   end
 
   def down_votes
-    votes.where('down' => true)
+    votes.where(:up => false)
   end
 
   def has_voted?(user)
@@ -42,8 +52,8 @@ class Entry < ActiveRecord::Base
       :content     => content,
       :author_name => author_name,
       :kind        => kind,
-      :path        => entry_path(self)
-      #:picture_url => $this->picture->url('medium')
+      :path        => entry_path(self),
+      :picture_url => picture.url('medium')
     }
   end
 

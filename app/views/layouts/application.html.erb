@@ -28,13 +28,13 @@
               <ul class="nav navbar-nav pull-right">
                 <li class="agenda">
                   <a href="/entries#content-anchor">
-                    <img src="/images/calendar.png">
+                    <%= image_tag 'calendar.png' %>
                     Agenda
                   </a>
                 </li>
                 <li class="news">
                   <a href="/entries#content-anchor">
-                    <img src="/images/news.png">
+                    <%= image_tag 'news.png' %>
                     News
                   </a>
                 </li>
@@ -43,7 +43,7 @@
             <div>
               <ul class="nav navbar-nav pull-right">
                 <li class="add">
-                  <a href="<% URL::route('entries.create') %>">
+                  <a href="<%= new_entry_path %>">
                     Soumettre une publication
                     <i class="glyphicon glyphicon-plus"></i>
                   </a>
@@ -61,7 +61,7 @@
           <div class="container">
             <div class="carousel-caption">
               <a href="/">
-                <img src="/images/logo.png"/>
+                <%= image_path('logo.png') %>
               </a>
             </div>
           </div>
@@ -89,7 +89,7 @@
       <br/><br/>
 
       <a href="/">
-        <img src="/images/logo-black.png"/>
+        <%= image_path('logo-black.png') %>
       </a>
     </footer>
 

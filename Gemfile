@@ -16,7 +16,12 @@ gem 'mysql2'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
-#gem "select2-rails"
+# gem "select2-rails"
+
+# Images processing
+
+gem 'carrierwave'
+gem 'rmagick',   :require => false
 
 # Authorization / Admin
 
@@ -25,15 +30,15 @@ gem 'rails_admin'
 
 # Utils
 
-#gem 'enumerize'
-#gem 'factory_girl'
-#gem 'faker'
-#gem 'rabl'
-#gem 'redcarpet'
-#gem 'pygments.rb'
-#gem 'text'
-#gem 'sitemap_generator'
-#gem 'airbrake'
+# gem 'enumerize'
+# gem 'factory_girl'
+# gem 'faker'
+# gem 'rabl'
+# gem 'redcarpet'
+# gem 'pygments.rb'
+# gem 'text'
+# gem 'sitemap_generator'
+# gem 'airbrake'
 
 group :development do
   gem 'spring'

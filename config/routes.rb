@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  resource :comments
-  resource :entries
+  resources :comments
+  resources :entries
 
   get '/welcome' => 'pages#welcome'
   get '/thanks'  => 'pages#thanks'

@@ -1,0 +1,9 @@
+development:
+  adapter:  mysql2
+  host:     localhost
+  username: development
+  password: development
+  encoding: utf8
+  database: creativemons-rails
+  #pool: 10
+  #reconnect: true

@@ -1,0 +1,28 @@
+<div class="entries">
+  <% @entries.each do |entry| %>
+    <div class="col-lg-4 entry <%= entry.kind %>">
+      <div class="inner-entry">
+        <a href="<%= entry_path(entry) %>">
+          <img class="img-rounded" src="<%= entry.picture.url('medium') %>"/>
+        </a>
+        <% if entry.kind == 'event' %>
+          <div class="event-date">
+            <%# date("d-m", strtotime(entry.start_date)) %><br/><%# date("Y", strtotime(entry.start_date)) %>
+          </div>
+        <% end %>
+        <div class="red-line">
+        </div>
+        <h2><%= entry.title %></h2>
+        <hr/>
+        <p class="content">
+          <%= truncate(entry.content, :length => 240) %>
+        </p>
+        <p class="details">
+          <a class="btn btn-default" href="<%= entry_path(entry) %>" role="button">
+            Lire plus... <!-- &raquo; -->
+          </a>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
