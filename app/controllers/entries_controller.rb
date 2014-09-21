@@ -5,8 +5,9 @@ class EntriesController < ApplicationController
 
   def show
     if params[:voter_token]
-      @voter = User.find_by_token(params[:voter_token])
-      @entry = Entry.find(params[:id])
+      @voter   = User.find_by_token(params[:voter_token])
+      @entry   = Entry.find(params[:id])
+      @comment = Comment.new(:user => @voter, :entry => @entry)
     elsif params[:author_token]
       @author = true
       @entry  = Entry.find_by_token(params[:token])
