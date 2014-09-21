@@ -30,7 +30,7 @@ gem 'rails_admin'
 
 # Utils
 
-# gem 'enumerize'
+gem 'enumerize'
 # gem 'factory_girl'
 # gem 'faker'
 # gem 'rabl'

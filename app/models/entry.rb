@@ -1,5 +1,12 @@
 class Entry < ActiveRecord::Base
 
+  # Enumerize
+
+  extend Enumerize
+
+  enumerize :kind, :in    => [:article, :event],
+                   :scope => true
+
   # Carrierwave (image processing)
 
   mount_uploader :picture, PictureUploader
@@ -74,16 +81,7 @@ class Entry < ActiveRecord::Base
 
 
 
-#    public function __construct(array $attributes = array()) {
-#      $this->hasAttachedFile('picture', [
-#          'styles' => [
-#            'large'  => '1140x550',
-#            'medium' => '360x210#',
-#            'thumb'  => '100x100'
-#          ]
-#      ]);
-#      parent::__construct($attributes);
-#    }
+
 #
 #    public function authorUrl() {
 #      return URL::route('entries.showAsAuthor', array($this->token));
