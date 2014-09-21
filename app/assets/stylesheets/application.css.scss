@@ -6,6 +6,9 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "shared/bootstrap-datetimepicker";
+@import "shared/theme";
+@import "shared/header";
 
-//@import "shared/bootstrap_custom";
-//@import "shared/header_small";
+@import "entries/index";
+@import "entries/show";
+@import "entries/thanks";

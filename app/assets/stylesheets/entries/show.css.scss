@@ -1,0 +1,97 @@
+.entries-show {
+  .picture {
+    height:550px;
+    overflow:hidden;
+
+  img {
+    max-width:100%;
+  }
+  }
+
+  h1 {
+    width: 100%;
+    background-color: #e53953;
+    padding: 20px;
+    color: white;
+    margin-top: 34px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700
+  }
+
+  .content {
+    padding: 20px;
+    padding-left:0px;
+    font-size:18px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .link {
+    width: 100%;
+    background-color: black;
+    height: 60px;
+    color: white;
+    margin-top: 34px;
+    text-transform: uppercase;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+
+    .link-icon {
+      width: 60px;
+      height: 60px;
+      float:left;
+      background-image:url(/images/link.png);
+    }
+
+    .dates-icon {
+      width: 60px;
+      height: 60px;
+      float:left;
+      background-image:url(/images/oclock.png);
+    }
+
+    .link-content, .dates-content {
+      float:left;
+      max-width: 384px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      a {
+        color: white;
+      }
+    }
+
+    .link-content {
+      padding-top:20px;
+      padding-left:20px;
+    }
+
+    .dates-content {
+      padding-top:12px;
+      padding-left:20px;
+
+      td {
+        padding-right: 7px;
+      }
+    }
+  }
+
+  hr {
+    border-color: black;
+    margin-top:34px;
+  }
+
+  .created_by_title {
+    font-family: 'Open Sans', sans-serif;
+    font-size:18px;
+    font-weight: 700;
+    text-transform:uppercase;
+  }
+
+  .created_at {
+    font-family: 'Open Sans', sans-serif;
+    text-align:right;
+    margin-top:50px;
+  }
+}

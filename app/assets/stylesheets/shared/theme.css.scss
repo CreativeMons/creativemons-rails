@@ -1,0 +1,89 @@
+.marketing {
+  .col-lg-4 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  h2 {
+    font-weight: normal;
+  }
+
+  .col-lg-4 p {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+#content-anchor {
+  display: block;
+  position: relative;
+  top: -80px;
+  visibility: hidden;
+}
+
+.red-bar {
+  background-color: #e53953;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  height: 7px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.red-bar-2 {
+  background-color: #e53953;
+  height: 7px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.form-control {
+  background-color: #EEEEEE;
+}
+
+.new-article {
+  margin-top: 30px;
+  margin-bottom: 60px;
+
+  .errors {
+    margin-bottom: 30px;
+    margin-top:-20px;
+    background-color:#e53953;
+    padding:20px;
+    color:white;
+  }
+}
+
+.btn-default {
+  background-color: #e53953;
+  color: white;
+  border-radius: 0px;
+  font-size: 22px;
+}
+
+.btn-default:hover {
+  background-color: #A53445;
+  color: white;
+}
+
+footer {
+  background-color: #121923;
+  text-align:center;
+  padding-top: 40px;
+  padding-bottom:40px;
+
+  .love {
+    color:#e53953;
+    font-weight:bold;
+  }
+
+  a .img {
+    vertical-align: -9px;
+  }
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
