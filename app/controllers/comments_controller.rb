@@ -1,22 +1,13 @@
 class CommentsController < ApplicationController
   def create
+    @voter   = User.find_by_token(params[:voter_token])
     @comment = Comment.new(strong_params)
+    @comment.user = @voter
 
-    #$user_token = $this->getUserToken();
-    #$user       = User::where('token', '=', $userToken)->first();
-#
-    #if($validator->fails()) {
-    #  return Redirect::back()->withErrors($validator)
-    #                         ->withInput();
-    #}
-    #else {
-    #  if($user->comments()->save($comment)) {
-    #    $comment->notifyEntryAuthor();
-    #    return Redirect::route('entries.showAsVoter', [ $comment->entry->id ]);
-    #  } else {
-    #    return "Impossible d'ajouter le commentaire.";
-    #  }
-    #}
+    if @comment.save
+      #@comment.notifyEntryAuthor
+      redirect_to entry_path(@comment.entry, :voter_token => params[:voter_token])
+    end
   end
 
   def strong_params

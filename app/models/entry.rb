@@ -16,6 +16,12 @@ class Entry < ActiveRecord::Base
   has_many :comments
   has_many :votes
 
+  # Validations
+
+  validates :kind, :title, :content, :author_name,
+            :author_email, :url, :picture,
+            :presence => true
+
   # Callbacks
 
   after_initialize :create_token
@@ -50,18 +56,6 @@ class Entry < ActiveRecord::Base
 
   def published?
     up_votes.count >= User.count / 3 && down_votes.count < User.count / 4
-  end
-
-  def as_json
-    {
-      :id          => id,
-      :title       => title,
-      :content     => content,
-      :author_name => author_name,
-      :kind        => kind,
-      :path        => entry_path(self),
-      :picture_url => picture.url('medium')
-    }
   end
 
   private

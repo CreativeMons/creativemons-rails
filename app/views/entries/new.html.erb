@@ -1,91 +1,91 @@
-<%= form_for @entry, :multipart => true, :html => { :class => "form-horizontal new-article" } %>
+<%= form_for @entry, :multipart => true, :html => { :class => "form-horizontal new-article" } do |f| %>
 
-  @if($errors->has())
+  <% if @entry.errors.any? %>
     <div class="errors col-sm-offset-4 col-sm-5">
-      @foreach ($errors->all() as $error)
-        <div><% $error %></div>
-      @endforeach
+      <% @entry.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
     </div>
-  @endif
+  <% end %>
+
 
   <div class="form-group">
-    <% Form::label('author_name', 'Votre nom *', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :author_name, 'Nom', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::text('author_name', '', ['class' => "form-control"]); %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <% Form::label('author_email', 'Votre email *', ['class' => "control-label col-sm-4"]); %>
-
-    <div class="col-sm-5">
-      <% Form::text('author_email', '', ['class' => "form-control"]); %>
+      <%= f.text_field :author_name, :class => "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <% Form::label('kind', 'Type de publication', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :author_email, 'Email', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::select('kind', ['article' => 'Article', 'event' => 'Evénement'], '', ['class' => 'form-control']); %>
+      <%= f.text_field :author_email, :class => "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <% Form::label('title', 'Titre *', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :kind, 'Type de publication', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::text('title', '', ['class' => "form-control"]); %>
+      <%= f.select :kind, Entry.kind.options, {}, :class => 'form-control' %>
     </div>
   </div>
 
   <div class="form-group">
-    <% Form::label('content', 'Contenu *', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :title, 'Titre', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::textarea('content', '', ['class' => "form-control"]); %>
+      <%= f.text_field :title, :class => "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
-    <% Form::label('picture', 'Image *', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :content, 'Contenu', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::file('picture', '', ['class' => "form-control"]); %>
+      <%= f.text_area :content, :class => "form-control", :cols => 50, :rows => 10 %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :picture, 'Image', :class => "control-label col-sm-4" %>
+
+    <div class="col-sm-5">
+      <%= f.file_field :picture, :class => "form-control" %>
     </div>
   </div>
 
   <div id="events-only" style="display: none;">
     <div class="form-group">
-      <% Form::label('start_date', 'Date de début *', ['class' => "control-label col-sm-4"]); %>
+      <%= f.label :start_date, 'Date de début', :class => "control-label col-sm-4" %>
 
       <div class="col-sm-5">
-        <% Form::text('start_date', '', ['class' => 'form-control datepicker']); %>
+        <%= f.text_field :start_date, :class => 'form-control datepicker' %>
       </div>
     </div>
 
     <div class="form-group">
-      <% Form::label('end_date', 'Date de fin *', ['class' => "control-label col-sm-4"]); %>
+      <%= f.label :end_date, 'Date de fin', :class => "control-label col-sm-4" %>
 
       <div class="col-sm-5">
-        <% Form::text('end_date', '', ['class' => 'form-control datepicker']); %>
+        <%= f.text_field :end_date, :class => 'form-control datepicker' %>
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <% Form::label('url', 'Lien externe', ['class' => "control-label col-sm-4"]); %>
+    <%= f.label :url, 'Lien externe', :class => "control-label col-sm-4" %>
 
     <div class="col-sm-5">
-      <% Form::text('url', '', ['class' => "form-control"]); %>
+      <%= f.text_field :url, :class => "form-control" %>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-4 col-sm-5">
-      <% Form::submit('Soumettre', ['class' => 'btn btn-default']) %>
+      <%= f.submit 'Soumettre', :class => 'btn btn-default' %>
     </div>
   </div>
-
 <% end %>

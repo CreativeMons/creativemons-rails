@@ -118,6 +118,7 @@
   <% if @voter %>
     <%= form_for @comment, :html => { :class => "form-horizontal new-article" } do |f| %>
       <%= f.hidden_field :entry_id %>
+      <%= hidden_field_tag :voter_token, params[:voter_token] %>
 
       <div class="form-group">
         <%= f.label :content, 'Votre commentaire', :class => "control-label col-sm-4" %>
@@ -144,9 +145,9 @@
           Attention, le vote est définitif !
         </p>
         <p>
-          <%= link_to "Accepter la publication de cette soumission", entry_vote_up_path(@entry) %>
+          <%= link_to "Accepter la publication de cette soumission", entry_vote_up_path(@entry, :voter_token => params[:voter_token]) %>
           <br/>
-          <%= link_to "Refuser la publication de cette soumission", entry_vote_down_path(@entry) %>
+          <%= link_to "Refuser la publication de cette soumission", entry_vote_down_path(@entry, :voter_token => params[:voter_token]) %>
         </p>
       <% end %>
     </div>

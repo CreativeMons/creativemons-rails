@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
 
   # Validations
 
-  validates :entry_id, :content, :presence => true
+  validates :entry_id, :user_id, :content, :presence => true
 
   def notify_entry_author
     #Mail::send('emails.authorEntryNewComment', [ 'entry' => $entry, 'comment' => $this ], function($message) use ($entry) {
