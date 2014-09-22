@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr-BE">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div>
+
+      <p>
+        Une personne a posté un nouvel article sur CreativeMons. Merci de voter dans les plus brefs délais.
+        Si vous trainez, vous serez totalement inutile.
+      </p>
+
+      <h2>
+        <%= @entry.title %>
+      </h2>
+
+      <p>
+        <%= @entry.content %>
+      </p>
+
+      <p>
+        <a href="<%= entry_url(@entry, :voter_token => @user.token) %>">
+          <%= entry_url(@entry, :voter_token => @user.token) %>
+        </a>
+      </p>
+
+    </div>
+  </body>
+</html>

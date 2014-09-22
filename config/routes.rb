@@ -6,9 +6,6 @@ Rails.application.routes.draw do
     get :vote_down
   end
 
-  get '/welcome' => 'pages#welcome'
-  get '/thanks'  => 'pages#thanks'
-
   root 'entries#index'
 
   # Route::get('/entries.json',           [ 'as' => 'entries.indexJson',    'uses' => 'EntryController@indexJson'    ]);

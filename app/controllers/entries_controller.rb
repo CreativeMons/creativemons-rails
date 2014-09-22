@@ -24,8 +24,10 @@ class EntriesController < ApplicationController
     @entry = Entry.new(strong_params)
 
     if @entry.save
-      #@entry.notifyAuthor
-      #@entry.notifyUsers
+      Mailer.notify_submission_to_author(@entry).deliver
+      User.all.each do |user|
+        Mailer.notify_submission_to_user(@entry, user).deliver
+      end
       render 'thanks'
     else
       render 'new'
@@ -37,7 +39,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:entry_id])
 
     if @vote = @entry.vote_up(@voter)
-      #@vote.notify_author
+      Mailer.notify_vote_to_author(@vote).deliver
       redirect_to entry_path(@entry, :voter_token => params[:voter_token])
     end
   end
@@ -47,7 +49,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:entry_id])
 
     if @vote = @entry.vote_down(@voter)
-      #@vote.notify_author
+      Mailer.notify_vote_to_author(@vote).deliver
       redirect_to entry_path(@entry, :voter_token => params[:voter_token])
     end
   end

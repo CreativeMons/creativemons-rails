@@ -72,34 +72,4 @@ class Entry < ActiveRecord::Base
   def create_token
     self.token ||= UUIDTools::UUID.random_create.to_s
   end
-
-
-
-
-#
-#    public function authorUrl() {
-#      return URL::route('entries.showAsAuthor', array($this->token));
-#    }
-#
-#    public function notifyAuthor() {
-#      $entry = $this;
-#
-#      Mail::send('emails.authorEntrySubmitted', [ 'entry' => $entry ], function($message) use ($entry) {
-#        $subject = 'Votre article a été soumis';
-#        $message->to($entry->author_email, $entry->author_name)->subject($subject);
-#      });
-#    }
-#
-#    public function notifyUsers() {
-#      $entry = $this;
-#
-#      foreach(User::all() as $user) {
-#        Mail::send('emails.userEntrySubmitted', [ 'entry' => $entry, 'user' => $user ], function($message) use ($user, $entry) {
-#          $subject = 'Action requise: un article a été posté sur Creative Mons';
-#          $message->to($user->email, $user->name)
-#                  ->subject($subject);
-#        });
-#      }
-#    }
-
 end
