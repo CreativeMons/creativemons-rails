@@ -20,13 +20,13 @@
             <tr>
               <td>Start</td>
               <td>:</td>
-              <td><%# date("d-m-Y — H:i", strtotime(@entry.start_date)) %></td>
+              <td><%= @entry.start_date.strftime('%d-%m-%Y – %H:%M') %></td>
             </tr>
 
             <tr>
               <td>End</td>
               <td>:</td>
-              <td><%# date("d-m-Y — H:i", strtotime(@entry.end_date)) %></td>
+              <td><%= @entry.end_date.strftime('%d-%m-%Y – %H:%M') %></td>
             </tr>
           </table>
         </div>
@@ -63,7 +63,7 @@
     <%= @entry.author_name %>
 
     <div class="created_at">
-      <%# date("d-m-Y à H:i", strtotime(@entry.created_at)) %>
+      <%= @entry.created_at.strftime('%d-%m-%Y à %H:%M') %>
     </div>
   </div>
 
@@ -109,8 +109,7 @@
 
     <h3>Commentaires</h3>
     <% @entry.comments.each do |comment| %>
-      <strong><%= comment.user.name %></strong> (<%# date("d/m/Y h:i", strtotime(comment.created_at)) %>)<br />
-      <!-- <strong><%# comment.user.name %></strong> <%# comment.created_at.diffForHumans() %><br /> -->
+      <strong><%= comment.user.name %></strong> (<%= comment.created_at.strftime('%d-%m-%Y à %H:%M') %>)<br />
       <pre><%= comment.content %></pre>
     <% end %>
   <% end %>

@@ -7,7 +7,9 @@
         </a>
         <% if entry.kind == 'event' %>
           <div class="event-date">
-            <%# date("d-m", strtotime(entry.start_date)) %><br/><%# date("Y", strtotime(entry.start_date)) %>
+            <%= entry.start_date.strftime("%d-%m") %>
+            <br/>
+            <%= entry.start_date.strftime("%Y") %>
           </div>
         <% end %>
         <div class="red-line">
