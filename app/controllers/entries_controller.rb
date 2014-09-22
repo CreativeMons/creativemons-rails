@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
       @comment = Comment.new(:user => @voter, :entry => @entry)
     elsif params[:author_token]
       @author = true
-      @entry  = Entry.find_by_token(params[:token])
+      @entry  = Entry.find_by_token(params[:author_token])
     else
       @entry = Entry.find(params[:id])
     end
