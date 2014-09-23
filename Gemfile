@@ -31,6 +31,7 @@ gem 'rails_admin'
 # Utils
 
 gem 'enumerize'
+gem 'paper_trail'
 # gem 'factory_girl'
 # gem 'faker'
 # gem 'rabl'

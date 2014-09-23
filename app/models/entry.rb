@@ -11,6 +11,10 @@ class Entry < ActiveRecord::Base
 
   mount_uploader :picture, PictureUploader
 
+  # PaperTrail
+
+  has_paper_trail
+
   # Associations
 
   has_many :comments
@@ -62,8 +66,9 @@ class Entry < ActiveRecord::Base
 
   def vote(user, up)
     if not has_voted?(user)
-      vote   = Vote.create!(:user => user, :up => up)
-      votes << vote
+      vote   = Vote.create!(:user  => user,
+                            :up    => up,
+                            :entry => self)
     end
 
     return vote
