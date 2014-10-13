@@ -10,9 +10,10 @@ class Mailer < ActionMailer::Base
     })
   end
 
-  def notify_submission_to_user(entry, user)
+  def notify_submission_to_user(entry, user, vote)
     @entry = entry
-    @user = user
+    @user  = user
+    @vote  = vote
 
     mail({
       :subject => "Un article a été posté sur Creative Mons : #{@entry.title}",

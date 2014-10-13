@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20140923072722) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "token"
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
@@ -62,7 +61,8 @@ ActiveRecord::Schema.define(version: 20140923072722) do
   create_table "votes", force: true do |t|
     t.integer  "user_id"
     t.integer  "entry_id"
-    t.boolean  "up",         default: true
+    t.string   "decision",   default: "none"
+    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

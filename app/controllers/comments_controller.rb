@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    @voter        = User.find_by_token(params[:voter_token])
+    @vote         = Vote.find_by_token(params[:voter_token])
+    @voter        = @vote.user
     @comment      = Comment.new(strong_params)
     @comment.user = @voter
 

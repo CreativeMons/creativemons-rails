@@ -81,37 +81,60 @@
 
   <% if @author || @voter %>
     <div style="background-color: yellow;">
-      Nombre total de votes: <%= @entry.votes.count %>
+      <% if @entry.published? %>
+        L'article est publié.
+      <% else %>
+        L'article n'est pas publié.
+      <% end %>
 
-      <% if @entry.up_votes.count > 0 %>
-        <h3>Votes positifs</h3>
+      <br/>
+
+      <% if @entry.accept_votes.count > 0 %>
+        <h3>Votes positifs (<%= @entry.accept_votes.count %>)</h3>
         <ul>
-          <% @entry.up_votes.each do |vote| %>
+          <% @entry.accept_votes.each do |vote| %>
             <li><%= vote.user.name %></li>
           <% end %>
         </ul>
       <% else %>
-        <h3>Il n'y a pas de vote positif</h3>
+        <h3>Il n'y a pas de votes positifs</h3>
       <% end %>
 
 
-      <% if @entry.down_votes.count > 0 %>
-        <h3>Votes négatifs</h3>
+      <% if @entry.reject_votes.count > 0 %>
+        <h3>Votes négatifs (<%= @entry.reject_votes.count %>)</h3>
         <ul>
-          <% @entry.down_votes.each do |vote| %>
+          <% @entry.reject_votes.each do |vote| %>
             <li><%= vote.user.name %></li>
           <% end %>
         </ul>
       <% else %>
-        <h3>Il n'y a pas de vote négatifs</h3>
+        <h3>Il n'y a pas de votes négatifs</h3>
+      <% end %>
+
+      <% if @entry.waiting_votes.count > 0 %>
+        <h3>Votes en attente (<%= @entry.waiting_votes.count %>)</h3>
+        <ul>
+          <% @entry.waiting_votes.each do |vote| %>
+            <li><%= vote.user.name %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <h3>Il n'y a pas de votes en attente</h3>
       <% end %>
     </div>
 
     <h3>Commentaires</h3>
+
+    <% if @entry.comments.empty? %>
+      Il n'y a pas de commentaires.
+    <% end %>
+
     <% @entry.comments.each do |comment| %>
       <strong><%= comment.user.name %></strong> (<%= comment.created_at.strftime('%d-%m-%Y à %H:%M') %>)<br />
       <pre><%= comment.content %></pre>
     <% end %>
+    <br/><br/>
   <% end %>
 
   <% if @voter %>
@@ -137,18 +160,19 @@
     <hr>
 
     <div>
-      <% if @entry.has_voted?(@voter) %>
-        <h3>Tu as déjà voté !</h3>
-      <% else %>
-        <p>
-          Attention, le vote est définitif !
-        </p>
-        <p>
-          <%= link_to "Accepter la publication de cette soumission", entry_vote_up_path(@entry, :voter_token => params[:voter_token]) %>
-          <br/>
-          <%= link_to "Refuser la publication de cette soumission", entry_vote_down_path(@entry, :voter_token => params[:voter_token]) %>
-        </p>
-      <% end %>
+      <p>
+        <% if @vote.decision.in? ['none', 'reject'] %>
+          <%= link_to "Accepter la publication de cette soumission", vote_path(@vote.token, :vote => { :decision => 'accept' }), :method => :patch %>
+        <% end %>
+        <br/>
+        <% if @vote.decision.in? ['none', 'accept'] %>
+          <%= link_to "Refuser la publication de cette soumission", vote_path(@vote.token, :vote => { :decision => 'reject' }), :method => :patch %>
+        <% end %>
+        <br/>
+        <% if @vote.decision.in? ['accept', 'reject'] %>
+          <%= link_to "Annuler mon vote concernant cette soumission", vote_path(@vote.token, :vote => { :decision => 'none' }), :method => :patch %>
+        <% end %>
+      </p>
     </div>
 
   <% end %>

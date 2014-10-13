@@ -1,18 +1,28 @@
 class EntriesController < ApplicationController
   def index
-    @entries = Entry.published
+    @entries = Entry.order('created_at DESC')
+                    .published
+                    .take(30)
   end
 
   def show
     if params[:voter_token]
-      @voter   = User.find_by_token(params[:voter_token])
+      @vote    = Vote.find_by_token(params[:voter_token])
+      @voter   = @vote.user
       @entry   = Entry.find(params[:id])
       @comment = Comment.new(:user => @voter, :entry => @entry)
+      render
     elsif params[:author_token]
       @author = true
       @entry  = Entry.find_by_token(params[:author_token])
+      render
     else
       @entry = Entry.find(params[:id])
+      if @entry.published?
+        render
+      else
+        redirect_to :root
+      end
     end
   end
 
@@ -26,31 +36,12 @@ class EntriesController < ApplicationController
     if @entry.save
       Mailer.notify_submission_to_author(@entry).deliver
       User.all.each do |user|
-        Mailer.notify_submission_to_user(@entry, user).deliver
+        vote = Vote.create!(:user => user, :entry => @entry)
+        Mailer.notify_submission_to_user(@entry, user, vote).deliver
       end
       render 'thanks'
     else
       render 'new'
-    end
-  end
-
-  def vote_up
-    @voter = User.find_by_token(params[:voter_token])
-    @entry = Entry.find(params[:entry_id])
-
-    if @vote = @entry.vote_up(@voter)
-      Mailer.notify_vote_to_author(@vote).deliver
-      redirect_to entry_path(@entry, :voter_token => params[:voter_token])
-    end
-  end
-
-  def vote_down
-    @voter = User.find_by_token(params[:voter_token])
-    @entry = Entry.find(params[:entry_id])
-
-    if @vote = @entry.vote_down(@voter)
-      Mailer.notify_vote_to_author(@vote).deliver
-      redirect_to entry_path(@entry, :voter_token => params[:voter_token])
     end
   end
 

@@ -38,41 +38,31 @@ class Entry < ActiveRecord::Base
 
   # Methods
 
-  def up_votes
-    votes.where(:up => true)
+  def accept_votes
+    votes.all.select { |vote| vote.decision == 'accept' }
   end
 
-  def down_votes
-    votes.where(:up => false)
+  def reject_votes
+    votes.all.select { |vote| vote.decision == 'reject' }
+  end
+
+  def waiting_votes
+    votes.all.select { |vote| vote.decision == 'none' }
   end
 
   def has_voted?(user)
-    votes.where(:user_id => user.id).any?
-  end
-
-  def vote_up(user)
-    vote(user, true)
-  end
-
-  def vote_down(user)
-    vote(user, false)
+    votes.where(:user_id => user.id).decision != 'none'
   end
 
   def published?
-    up_votes.count >= User.count / 3 && down_votes.count < User.count / 4
+    num_votes  = votes.count
+    num_accept = accept_votes.count
+    num_reject = reject_votes.count
+
+    num_accept >= num_votes / 3 && num_reject < num_votes / 4
   end
 
   private
-
-  def vote(user, up)
-    if not has_voted?(user)
-      vote   = Vote.create!(:user  => user,
-                            :up    => up,
-                            :entry => self)
-    end
-
-    return vote
-  end
 
   def create_token
     self.token ||= UUIDTools::UUID.random_create.to_s
